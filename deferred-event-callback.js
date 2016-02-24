@@ -1,12 +1,12 @@
 "use strict";
 
-module.exports = function(timeoutValue, callback) {
+module.exports = function(options, callback) {
     if (window.attachEvent) {
-        window.attachEvent('onresize', function() {
+        window.attachEvent('on' + options.eventName, function() {
             executeCallbackDeferred();
         });
     } else if (window.addEventListener) {
-        window.addEventListener('resize', function() {
+        window.addEventListener(options.eventName, function() {
             executeCallbackDeferred();
         }, true);
     }
@@ -14,7 +14,6 @@ module.exports = function(timeoutValue, callback) {
     var id;
     function executeCallbackDeferred() {
         clearTimeout(id);
-        id = setTimeout(callback, timeoutValue);
+        id = setTimeout(callback, options.timeoutValue);
     }
-}
-
+};

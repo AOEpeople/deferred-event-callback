@@ -1,8 +1,8 @@
 {
-  "name": "deferred-resize",
-  "version": "2.0.0",
-  "description": "calling window.resize callback with a delay",
-  "main": "deferredresize.js",
+  "name": "deferred-event-callback",
+  "version": "3.0.0",
+  "description": "calling event callbacks with a delay",
+  "main": "deferred-event-callback.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
