@@ -1,6 +1,6 @@
 {
   "name": "deferred-event-callback",
-  "version": "3.0.1",
+  "version": "3.0.2",
   "description": "calling event callbacks with a delay",
   "main": "deferred-event-callback.js",
   "scripts": {
