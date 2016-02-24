@@ -1,12 +1,12 @@
 "use strict";
 
-export default (timeoutValue, callback) => {
+module.exports = function(timeoutValue, callback) {
     if (window.attachEvent) {
-        window.attachEvent('onresize', () => {
+        window.attachEvent('onresize', function() {
             executeCallbackDeferred();
         });
     } else if (window.addEventListener) {
-        window.addEventListener('resize', () => {
+        window.addEventListener('resize', function() {
             executeCallbackDeferred();
         }, true);
     }
