@@ -1,4 +1,5 @@
 var lib = require('../deferred-event-callback');
+var libConf;
 var node;
 
 afterEach(function() {
@@ -13,12 +14,14 @@ beforeEach(function() {
         attachEvent: function() {},
         addEventListener: function() {}
     };
+
+    libConf = {eventNames: ['keypress', 'keyup'], nodes: [node, node, node]};
 });
 
 it('should call attachEvent (if available) on each node with every eventName prefixed by "on"', function() {
     window.attachEvent = function() {};
     var spy = spyOn(node, 'attachEvent');
-    lib({eventNames: ['keypress', 'keyup'], nodes: [node, node, node]}, function() {});
+    lib(libConf, function() {});
 
     // 3 nodes * 2 events = 6 calls
     expect(spy).toHaveBeenCalledTimes(6);
@@ -45,7 +48,7 @@ it('should call attachEvent (if available) on each node with every eventName pre
 it('should not call addEventListener if attachEvent is available', function() {
     window.attachEvent = function() {};
     var spy = spyOn(node, 'addEventListener');
-    lib({eventNames: ['keypress', 'keyup'], nodes: [node, node, node]}, function() {});
+    lib(libConf, function() {});
 
     // 3 nodes * 2 events = 6 calls
     expect(spy).not.toHaveBeenCalled();
@@ -54,7 +57,7 @@ it('should not call addEventListener if attachEvent is available', function() {
 it('should call addEventListener (as fallback) on each node with every eventName', function() {
     window.addEventListener = function() {};
     var spy = spyOn(node, 'addEventListener');
-    lib({eventNames: ['keypress', 'keyup'], nodes: [node, node, node]}, function() {});
+    lib(libConf, function() {});
 
     // 3 nodes * 2 events = 6 calls
     expect(spy).toHaveBeenCalledTimes(6);
@@ -81,8 +84,7 @@ it('should call addEventListener (as fallback) on each node with every eventName
 it('should not call attachEvent if addEventListener is available', function() {
     window.addEventListener = function() {};
     var spy = spyOn(node, 'attachEvent');
-    lib({eventNames: ['keypress', 'keyup'], nodes: [node, node, node]}, function() {});
+    lib(libConf, function() {});
 
-    // 3 nodes * 2 events = 6 calls
     expect(spy).not.toHaveBeenCalled();
 });

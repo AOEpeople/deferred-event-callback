@@ -1,7 +1,18 @@
 var lib = require('../deferred-event-callback');
+var node;
 
 afterEach(function() {
     window = undefined;
+    node = undefined;
+});
+
+beforeEach(function() {
+    window = {};
+
+    node = {
+        attachEvent: function() {},
+        addEventListener: function() {}
+    };
 });
 
 describe('general errors', function() {
@@ -33,7 +44,15 @@ describe('errors due to wrong option object', function() {
         );
     });
     it('should fail silently if options.eventNames.length is lower than 1', function() {
-        // TODO: Implement as soon as it is clear how to test this best
+        window.addEventListener = function() {};
+        window.attachEvent      = function() {};
+        var addEventListenerSpy = spyOn(node, 'addEventListener');
+        var attachEventSpy      = spyOn(node, 'attachEvent');
+
+        lib({eventNames: [], nodes: [node, node]}, function() {});
+
+        expect(addEventListenerSpy).not.toHaveBeenCalled();
+        expect(attachEventSpy).not.toHaveBeenCalled();
     });
     it('should throw error if options.nodes is not an Array', function() {
         expect(function() {
@@ -44,7 +63,15 @@ describe('errors due to wrong option object', function() {
         );
     });
     it('should fail silently if options.nodes.length is lower than 1', function() {
-        // TODO: Implement as soon as it is clear how to test this best
+        window.addEventListener = function() {};
+        window.attachEvent      = function() {};
+        var addEventListenerSpy = spyOn(node, 'addEventListener');
+        var attachEventSpy      = spyOn(node, 'attachEvent');
+
+        lib({eventNames: ['keydown', 'keypress'], nodes: []}, function() {});
+
+        expect(addEventListenerSpy).not.toHaveBeenCalled();
+        expect(attachEventSpy).not.toHaveBeenCalled();
     });
 });
 
