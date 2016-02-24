@@ -1,6 +1,6 @@
 {
   "name": "deferred-resize",
-  "version": "1.0.0",
+  "version": "2.0.0",
   "description": "calling window.resize callback with a delay",
   "main": "deferredresize.js",
   "scripts": {

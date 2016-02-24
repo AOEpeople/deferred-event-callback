@@ -17,3 +17,4 @@ module.exports = function(timeoutValue, callback) {
         id = setTimeout(callback, timeoutValue);
     }
 }
+
