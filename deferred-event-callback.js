@@ -1,11 +1,13 @@
 "use strict";
 
 module.exports = function(options, callback) {
-    if (options.eventNames instanceof Array !== true) throw new Error('Missing eventNames array.');
+    if (typeof options  !== 'object')   throw new Error('First argument needs to be an (configuration) object.');
+    if (typeof callback !== 'function') throw new Error('Second argument needs to be a (callback) function.');
+
+    if (options.eventNames instanceof Array !== true) throw new Error('Missing eventNames Array in configuration object.');
     if (options.eventNames.length < 1) return;
-    if (options.nodes instanceof Array !== true) throw new Error('Missing nodes array with elements to add event listeners.');
+    if (options.nodes instanceof Array !== true) throw new Error('Missing nodes Array inf configuration object.');
     if (options.nodes.length < 1) return;
-    if (typeof callback !== 'function') throw new Error('Missing callback function.');
 
     if (window.attachEvent) {
         options.nodes.forEach(function(node) {
