@@ -2,14 +2,15 @@
 
 module.exports = function(options, callback) {
     if (!options.eventName) throw new Error('Missing eventName property in options object.');
-    if (typeof callback !== 'function') throw new Error('Missing callback function.');
+    if (!options.node) throw new Error('Missing node to add event listener.');
+    if (typeof callback !== 'function') throw new Error('Missing callback function.');;
 
     if (window.attachEvent) {
-        window.attachEvent('on' + options.eventName, function() {
+        options.node.attachEvent('on' + options.eventName, function() {
             executeCallbackDeferred();
         });
     } else if (window.addEventListener) {
-        window.addEventListener(options.eventName, function() {
+        options.node.addEventListener(options.eventName, function() {
             executeCallbackDeferred();
         }, true);
     } else {
