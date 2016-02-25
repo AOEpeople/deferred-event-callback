@@ -4,11 +4,18 @@
   "description": "calling event callbacks with a delay",
   "main": "deferred-event-callback.js",
   "scripts": {
-    "test": "./node_modules/.bin/jasmine"
+    "test": "./node_modules/.bin/karma start"
   },
   "author": "Marc Dix",
   "license": "MIT",
   "devDependencies": {
-    "jasmine": "2.4.1"
+    "browserify": "12.0.2",
+    "jquery": "2.2.1",
+    "karma": "0.13.21",
+    "karma-browserify": "5.0.2",
+    "karma-jasmine": "0.3.7",
+    "karma-phantomjs-launcher": "1.0.0",
+    "phantomjs-prebuilt": "2.1.4",
+    "watchify": "3.7.0"
   }
 }

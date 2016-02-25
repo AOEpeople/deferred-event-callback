@@ -1,25 +1,31 @@
 var lib = require('../deferred-event-callback');
+var $ = require('jquery');
 var libConf;
 var node;
+var attachEvent = window.attachEvent;
+var addEventListener = window.addEventListener;
 
 afterEach(function() {
-    window = undefined;
     node = undefined;
+    window.attachEvent = attachEvent;
+    window.addEventListener = addEventListener;
 });
 
 beforeEach(function() {
-    window = {};
+    node = document.createElement('span');
 
-    node = {
-        attachEvent: function() {},
-        addEventListener: function() {}
-    };
+    if (window.attachEvent) {
+        window.addEventListener = window.attachEvent;
+        node.addEventListener   = node.attachEvent;
+    } else {
+        window.attachEvent = window.addEventListener;
+        node.attachEvent   = node.addEventListener;
+    }
 
     libConf = {eventNames: ['keypress', 'keyup'], nodes: [node, node, node]};
 });
 
 it('should call attachEvent (if available) on each node with every eventName prefixed by "on"', function() {
-    window.attachEvent = function() {};
     var spy = spyOn(node, 'attachEvent');
     lib(libConf, function() {});
 
@@ -46,7 +52,6 @@ it('should call attachEvent (if available) on each node with every eventName pre
 });
 
 it('should not call addEventListener if attachEvent is available', function() {
-    window.attachEvent = function() {};
     var spy = spyOn(node, 'addEventListener');
     lib(libConf, function() {});
 
@@ -55,7 +60,8 @@ it('should not call addEventListener if attachEvent is available', function() {
 });
 
 it('should call addEventListener (as fallback) on each node with every eventName', function() {
-    window.addEventListener = function() {};
+    window.attachEvent = undefined;
+
     var spy = spyOn(node, 'addEventListener');
     lib(libConf, function() {});
 
@@ -82,7 +88,8 @@ it('should call addEventListener (as fallback) on each node with every eventName
 });
 
 it('should not call attachEvent if addEventListener is available', function() {
-    window.addEventListener = function() {};
+    window.attachEvent = undefined;
+
     var spy = spyOn(node, 'attachEvent');
     lib(libConf, function() {});
 
