@@ -1,4 +1,4 @@
-var lib = require('../deferred-event-callback');
+var lib = require('../../deferred-event-callback');
 var node;
 
 afterEach(function() {
@@ -69,23 +69,4 @@ describe('errors due to wrong option object', function() {
 
         expect(spy).not.toHaveBeenCalled();
     });
-});
-
-it('should throw error if there is neither window.addEventListener nor window.attachEvent', function() {
-    var tempAttachEvent = window.attachEvent;
-    var tempAddEventListener = window.addEventListener;
-
-    window.attachEvent = undefined;
-    window.addEventListener = undefined;
-
-    expect(function() {
-        lib({eventNames: ['keypress'], nodes: [{}]}, function() {})
-    })
-    .toThrow(
-        new Error('Neither attachEvent nor addEventListener found. Are you using a browser or a dishwasher?')
-    );
-
-    window.attachEvent = tempAttachEvent;
-    window.addEventListener = tempAddEventListener;
-
 });
