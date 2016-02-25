@@ -54,7 +54,7 @@ describe('errors due to wrong option object', function() {
             lib({eventNames: ['keypress']}, function() {})
         })
             .toThrow(
-            new Error('Missing nodes Array inf configuration object.')
+            new Error('Missing nodes Array in configuration object.')
         );
     });
     it('should fail silently if options.nodes.length is lower than 1', function() {
