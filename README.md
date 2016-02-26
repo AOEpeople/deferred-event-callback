@@ -7,7 +7,7 @@ Calling event callbacks with a delay. Supports jQuery.
 deferredEventCallback(options, deferredCallback);
 ```
 
-### options
+### options (object)
 | option        | mandatory            | type     | defaultValue     | description                                         |
 | ------------- |:--------------------:| --------:|-----------------:|----------------------------------------------------:|
 | eventNames    | :white_check_mark:   | Array    | -                | The event names to which the node(s) should listen  |
@@ -15,7 +15,7 @@ deferredEventCallback(options, deferredCallback);
 | timeoutValue  | :x:                  | Number   | 300              | How long to wait before calling the  callback       |
 | jquery        | :x:                  | function | -                | Pass in jQuery instance to use jQuery event binding |
 
-### deferredCallback
+### deferredCallback (function)
 The callback is called after the specified timeoutValue. The timeout gets the node passed in on that the event has been triggered. The passed in node is not selected with jquery, even if options.jquery is a jquery instance.
 
 ## Why
