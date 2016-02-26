@@ -18,6 +18,13 @@ deferredEventCallback(options, deferredCallback);
 ### deferredCallback (function)
 The callback is called after the specified timeoutValue. The timeout gets the node passed in on that the event has been triggered. The passed in node is not selected with jquery, even if options.jquery is a jquery instance.
 
+## Example
+```
+deferredEventCallback({timeoutValue: 200, eventNames: ['resize'], nodes: [window], jquery: jQuery}, function() {
+  // called when resize event triggered on window with 200ms delay and only once (if no other resize event triggered on window for 200 ms)
+});
+```
+
 ## Why
 When using events like 'resize' you don't want to call your callback function everytime the browser triggers the resize event (it's quite often). Instead you want to wait some milliseconds and see if the resize is still in progress.
 
