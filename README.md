@@ -21,7 +21,8 @@ The callback is called after the specified timeoutValue. The timeout gets the no
 ## Example
 ```
 deferredEventCallback({timeoutValue: 200, eventNames: ['resize'], nodes: [window], jquery: jQuery}, function() {
-  // called when resize event triggered on window with 200ms delay and only once (if no other resize event triggered on window for 200 ms)
+  // called when resize event triggered on window with 200ms delay and only once(if no other 
+  // resize event triggered on window for 200 ms)
 });
 ```
 
