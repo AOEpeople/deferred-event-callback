@@ -1,3 +1,5 @@
+[![Build Status](https://travis-ci.org/AOEpeople/deferred-event-callback.svg?branch=master)](https://travis-ci.org/AOEpeople/deferred-event-callback)
+
 # deferred-event-callback
 
 Calling event callbacks with a delay. Supports jQuery.
