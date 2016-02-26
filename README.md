@@ -1,6 +1,6 @@
 # deferred-event-callback
 
-Calling event callbacks with a delay.
+Calling event callbacks with a delay. Supports jQuery.
 
 ## How
 ```
