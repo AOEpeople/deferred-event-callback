@@ -1,3 +1,24 @@
 # deferred-event-callback
 
 Calling event callbacks with a delay.
+
+## How
+```
+deferredEventCallback(options, deferredCallback);
+```
+
+### options
+| option        | mandatory            | defaultValue     | description                                         |
+| ------------- |:--------------------:| ----------------:|----------------------------------------------------:|
+| eventNames    | :white_check_mark:   | -                | The event names to which the node(s) should listen  |
+| nodes         | :white_check_mark:   | -                | The nodes to which the listeners should be bound    |
+| timeoutValue  | :x:                  | 300              | How long to wait before calling the  callback       |
+| jquery        | :x:                  | -                | Pass in jQuery instance to use jQuery event binding |
+
+### deferredCallback
+The callback is called after the specified timeoutValue. The timeout gets the node passed in on that the event has been triggered. The passed in node is not selected with jquery, even if options.jquery is a jquery instance.
+
+## Why
+When using events like 'resize' you don't want to call your callback function everytime the browser triggers the resize event (it's quite often). Instead you want to wait some milliseconds and see if the resize is still in progress.
+
+When using events like 'input' and 'propertychange' for stuff like livesuggestions you don't want to trigger a xhr everytime input / propertychange triggers. Instead you want to wait some milliseconds and see if the user is typing another letter.
