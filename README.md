@@ -12,7 +12,7 @@ deferredEventCallback(options, deferredCallback);
 | ------------- |:--------------------:| --------:|-----------------:|----------------------------------------------------:|
 | eventNames    | :white_check_mark:   | Array    | -                | The event names to which the node(s) should listen  |
 | nodes         | :white_check_mark:   | Array    | -                | The nodes to which the listeners should be bound    |
-| timeoutValue  | :x:                  | Array    | 300              | How long to wait before calling the  callback       |
+| timeoutValue  | :x:                  | Number   | 300              | How long to wait before calling the  callback       |
 | jquery        | :x:                  | function | -                | Pass in jQuery instance to use jQuery event binding |
 
 ### deferredCallback
