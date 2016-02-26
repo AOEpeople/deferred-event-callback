@@ -8,12 +8,12 @@ deferredEventCallback(options, deferredCallback);
 ```
 
 ### options
-| option        | mandatory            | defaultValue     | description                                         |
-| ------------- |:--------------------:| ----------------:|----------------------------------------------------:|
-| eventNames    | :white_check_mark:   | -                | The event names to which the node(s) should listen  |
-| nodes         | :white_check_mark:   | -                | The nodes to which the listeners should be bound    |
-| timeoutValue  | :x:                  | 300              | How long to wait before calling the  callback       |
-| jquery        | :x:                  | -                | Pass in jQuery instance to use jQuery event binding |
+| option        | mandatory            | type     | defaultValue     | description                                         |
+| ------------- |:--------------------:| --------:|-----------------:|----------------------------------------------------:|
+| eventNames    | :white_check_mark:   | Array    | -                | The event names to which the node(s) should listen  |
+| nodes         | :white_check_mark:   | Array    | -                | The nodes to which the listeners should be bound    |
+| timeoutValue  | :x:                  | Array    | 300              | How long to wait before calling the  callback       |
+| jquery        | :x:                  | function | -                | Pass in jQuery instance to use jQuery event binding |
 
 ### deferredCallback
 The callback is called after the specified timeoutValue. The timeout gets the node passed in on that the event has been triggered. The passed in node is not selected with jquery, even if options.jquery is a jquery instance.
