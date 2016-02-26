@@ -9,7 +9,15 @@ module.exports = function(options, callback) {
     if (options.nodes instanceof Array !== true) throw new Error('Missing nodes Array in configuration object.');
     if (options.nodes.length < 1) return;
 
-    if (window.attachEvent) {
+    if (options.jquery) {
+        options.nodes.forEach(function(node) {
+            options.eventNames.forEach(function(eventName) {
+                options.jquery(node).on(eventName, function() {
+                    executeCallbackDeferred(node);
+                });
+            });
+        });
+    } else if (window.attachEvent) {
         options.nodes.forEach(function(node) {
             options.eventNames.forEach(function(eventName) {
                 node.attachEvent('on' + eventName, function() {
