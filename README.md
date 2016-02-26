@@ -3,7 +3,7 @@
 Calling event callbacks with a delay. Supports jQuery.
 
 ## How
-```
+```javascript
 deferredEventCallback(options, deferredCallback);
 ```
 
@@ -19,9 +19,9 @@ deferredEventCallback(options, deferredCallback);
 The callback is called after the specified timeoutValue. The timeout gets the node passed in on that the event has been triggered. The passed in node is not selected with jquery, even if options.jquery is a jquery instance.
 
 ## Example
-```
+```javascript
 deferredEventCallback({timeoutValue: 200, eventNames: ['resize'], nodes: [window], jquery: jQuery}, function() {
-  // called when resize event triggered on window with 200ms delay and only once (if no other 
+  // executed with 200ms delay when resize event triggered on window and only once (if no other 
   // resize event triggered on window for 200 ms)
 });
 ```
