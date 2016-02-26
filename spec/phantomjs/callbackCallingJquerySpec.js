@@ -56,3 +56,16 @@ it('should call the callback once', function(done) {
         done();
     }, 100);
 });
+
+it('callback should get the node passed', function(done) {
+    var callback = jasmine.createSpy('callback');
+
+    lib({eventNames: ['keypress', 'keyup'], nodes: [node, node, node], jquery: $, timeoutValue: 100}, callback);
+
+    $(node).trigger('keyup');
+
+    setTimeout(function() {
+        expect(callback).toHaveBeenCalledWith(node);
+        done();
+    }, 100);
+});
