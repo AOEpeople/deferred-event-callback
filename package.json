@@ -1,6 +1,6 @@
 {
   "name": "deferred-event-callback",
-  "version": "5.1.2",
+  "version": "5.2.0",
   "description": "calling event callbacks with a delay",
   "main": "deferred-event-callback.js",
   "scripts": {
@@ -13,9 +13,19 @@
     "url": "https://github.com/AOEpeople/deferred-event-callback.git"
   },
   "bugs": "https://github.com/AOEpeople/deferred-event-callback/issues",
-  "keywords": ["event", "trigger", "delayed event", "deferred event", "delayed callback", "deferred callback", "callback", "jquery"],
+  "keywords": [
+    "event",
+    "trigger",
+    "delayed event",
+    "deferred event",
+    "delayed callback",
+    "deferred callback",
+    "callback",
+    "jquery"
+  ],
   "devDependencies": {
     "browserify": "12.0.2",
+    "jasmine-core": "2.4.1",
     "jquery": "2.2.1",
     "karma": "0.13.21",
     "karma-browserify": "5.0.2",
