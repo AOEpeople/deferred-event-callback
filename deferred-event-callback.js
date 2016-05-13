@@ -1,8 +1,6 @@
 "use strict";
 
-var id;
-
-var deferredCallback = function(options, callback) {
+var deferredCallback = function(options, callback, returnObj) {
     if (typeof options  !== 'object')   throw new Error('First argument needs to be an (configuration) object.');
     if (typeof callback !== 'function') throw new Error('Second argument needs to be a (callback) function.');
 
@@ -10,6 +8,8 @@ var deferredCallback = function(options, callback) {
     if (options.eventNames.length < 1) return;
     if (options.nodes instanceof Array !== true) throw new Error('Missing nodes Array in configuration object.');
     if (options.nodes.length < 1) return;
+
+    if (!returnObj) returnObj = {};
 
     if (options.jquery) {
         options.nodes.forEach(function(node) {
@@ -40,14 +40,13 @@ var deferredCallback = function(options, callback) {
     }
 
     function executeCallbackDeferred(node) {
-        clearTimeout(id);
-        id = setTimeout(function() { callback(node) }, options.timeoutValue || 300);
+        clearTimeout(returnObj.id);
+        returnObj.id = setTimeout(function() { callback(node) }, options.timeoutValue || 300);
     }
 };
 
-var abort = function() {
-    clearTimeout(id);
+deferredCallback.abort = function(returnObj) {
+    clearTimeout(returnObj.id);
 };
 
 module.exports = deferredCallback;
-module.exports.abort = abort;

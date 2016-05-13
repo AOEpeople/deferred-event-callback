@@ -73,14 +73,15 @@ it('callback should get the node passed', function(done) {
 it('callback should get aborted', function(done) {
     var callback = jasmine.createSpy('callback');
 
-    lib({eventNames: ['keypress', 'keyup'], nodes: [node, node, node], timeoutValue: 500}, callback);
+    var returnObj = {};
+    lib({eventNames: ['keypress', 'keyup'], nodes: [node, node, node], timeoutValue: 50}, callback, returnObj);
 
     node.dispatchEvent(new Event('keyup'));
 
-    lib.abort();
+    lib.abort(returnObj);
 
     setTimeout(function() {
         expect(callback).not.toHaveBeenCalled();
         done();
-    }, 500);
+    }, 100);
 });

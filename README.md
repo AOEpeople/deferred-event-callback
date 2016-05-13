@@ -27,6 +27,16 @@ deferredEventCallback({timeoutValue: 200, eventNames: ['resize'], nodes: [window
   // resize event triggered on window for 200 ms)
 });
 ```
+## Stopping callback triggering
+Sometimes it might be useful to stop the triggering of the deferred callback. This can be done by passing in a returnObject and afterwards calling `abort`, passing in the returnObject:
+
+```javascript
+    var returnObj;
+    lib({eventNames: ['keypress', 'keyup'], nodes: [node, node, node], jquery: $, timeoutValue: 50}, callback, returnObj);
+
+    // later do
+    lib.abort(returnObj);
+```
 
 ## Why
 When using events like 'resize' you don't want to call your callback function everytime the browser triggers the resize event (it's quite often). Instead you want to wait some milliseconds and see if the resize is still in progress.
