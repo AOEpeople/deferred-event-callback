@@ -1,15 +1,16 @@
 "use strict";
 
-var deferredCallback = function(options, callback, returnObj) {
-    if (typeof options  !== 'object')   throw new Error('First argument needs to be an (configuration) object.');
-    if (typeof callback !== 'function') throw new Error('Second argument needs to be a (callback) function.');
+var DeferredCallback = function(options) {
+    if (!(this instanceof DeferredCallback)) return new DeferredCallback(options);
 
+    if (typeof options !== 'object') throw new Error('First argument needs to be an (configuration) object.');
+    if (typeof options.callback !== 'function') throw new Error('Options argument needs to be have a (callback) property with a function.');
     if (options.eventNames instanceof Array !== true) throw new Error('Missing eventNames Array in configuration object.');
     if (options.eventNames.length < 1) return;
     if (options.nodes instanceof Array !== true) throw new Error('Missing nodes Array in configuration object.');
     if (options.nodes.length < 1) return;
 
-    if (!returnObj) returnObj = {};
+    var timeoutId;
 
     if (options.jquery) {
         options.nodes.forEach(function(node) {
@@ -40,13 +41,13 @@ var deferredCallback = function(options, callback, returnObj) {
     }
 
     function executeCallbackDeferred(node) {
-        clearTimeout(returnObj.id);
-        returnObj.id = setTimeout(function() { callback(node) }, options.timeoutValue || 300);
+        clearTimeout(timeoutId);
+        timeoutId = setTimeout(function() { options.callback(node) }, options.timeoutValue || 300);
+    }
+
+    this.abort = function() {
+        clearTimeout(timeoutId);
     }
 };
 
-deferredCallback.abort = function(returnObj) {
-    clearTimeout(returnObj.id);
-};
-
-module.exports = deferredCallback;
+module.exports = DeferredCallback;
